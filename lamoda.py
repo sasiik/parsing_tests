@@ -2,7 +2,7 @@ import scrapy
 from scrapy.crawler import CrawlerProcess
 
 
-class Stas(scrapy.Spider):
+class LamodaSpider(scrapy.Spider):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         self.i = 1
@@ -31,5 +31,5 @@ class Stas(scrapy.Spider):
 
 
 process = CrawlerProcess()
-process.crawl(Stas)
+process.crawl(LamodaSpider)
 process.start()
