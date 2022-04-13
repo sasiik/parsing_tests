@@ -14,12 +14,8 @@ class LamodaSpider(scrapy.Spider):
         if response.css('div.x-product-card__card'):
             for elem in response.css('div.x-product-card__card'):
                 name = elem.css('div.x-product-card-description__product-name::text').get()
-                if name[0] == ' ':
-                    name = name[1:]
-                if name[-1] == ' ':
-                    name = name[:-1]
                 yield {
-                    'name': name,
+                    'name': name.strip(),
                     'brand': elem.css('div.x-product-card-description__brand-name::text').get(),
                     'price': elem.css('span::text').get(),
                     'link': elem.css('a').attrib['href'],
