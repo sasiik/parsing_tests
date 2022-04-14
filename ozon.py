@@ -23,10 +23,11 @@ class OzonSpider(scrapy.Spider):
                     'link': list[i].attrib['href'],
                     'price': 'Нет в наличии'
                 }
-
-        next_page = response.css('a.ui-b3')[-1].attrib['href']
-        if next_page is not None:
+        try:
+            next_page = response.css('a.ui-b3')[-1].attrib['href']
             yield response.follow(next_page, callback=self.parse)
+        except:
+            pass
 
 
 process = CrawlerProcess()
