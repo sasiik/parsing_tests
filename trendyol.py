@@ -11,16 +11,16 @@ class OzonSpider(scrapy.Spider):
         self.i = 1
 
     def parse(self, response, **kwargs):
-        global i
-        for a in response.css('div.prdct-desc-cntnr-wrppr'):
-            yield {
-                'name': a.css('span::attr(title)').getall()[0] + ' ' + a.css('span::attr(title)').getall()[1],
-                'price': a.css('div.prc-box-dscntd::text').get()
+        if response.request.url not in self.start_urls or self.i == 1:
+            for a in response.css('div.prdct-desc-cntnr-wrppr'):
+                yield {
+                    'name': a.css('span::attr(title)').getall()[0] + ' ' + a.css('span::attr(title)').getall()[1],
+                    'price': a.css('div.prc-box-dscntd::text').get()
 
-            }
-        self.i += 1
-        next_page = f'https://www.trendyol.com/erkek-spor-ayakkabi-x-g2-c109?pi={self.i}'
-        yield response.follow(next_page, callback=self.parse)
+                }
+            self.i += 1
+            next_page = f'https://www.trendyol.com/erkek-spor-ayakkabi-x-g2-c109?pi={self.i}'
+            yield response.follow(next_page, callback=self.parse)
 
 
 process = CrawlerProcess()
