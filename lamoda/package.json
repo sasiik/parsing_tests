@@ -1,0 +1,10 @@
+{
+  "dependencies": {
+    "@google-cloud/translate": "^8.2.0",
+    "axios": "^1.6.8",
+    "cheerio": "^1.0.0-rc.12",
+    "exceljs": "^4.4.0",
+    "fs-extra": "^11.2.0",
+    "puppeteer": "^22.8.1"
+  }
+}
